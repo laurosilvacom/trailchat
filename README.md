@@ -1,8 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trailchat - AI-Powered Web Application Demo
+
+This repository contains the demo application for the O'Reilly Live Event: [AI-Powered Web Applications](https://www.oreilly.com/live-events/ai-powered-web-applications/0642572014610/).
+
+## About the Course
+
+Learn how to build and deploy fully functional AI-powered web applications using the AI SDK. This hands-on course demonstrates the integration of modern AI capabilities into web applications using Next.js and the Vercel AI SDK.
+
+## Tech Stack
+
+- [Next.js 14](https://nextjs.org/)
+- [Vercel AI SDK](https://sdk.vercel.ai/docs)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
+
+```bash
+git clone [repository-url]
+cd trailchat
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
@@ -10,27 +40,38 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file in the root directory and add your API keys:
 
-## Learn More
+```env
+# Add your environment variables here
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Feature 1 (TBD)
+- Feature 2 (TBD)
+- Feature 3 (TBD)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Course Resources
 
-## Deploy on Vercel
+- [Course Link](https://www.oreilly.com/live-events/ai-powered-web-applications/0642572014610/)
+- [Presentation Slides](#) (TBD)
+- [Additional Resources](#) (TBD)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This is a demo application for educational purposes. If you find any issues or have suggestions, please open an issue in the repository.
+
+## License
+
+[MIT License](LICENSE)
+
+---
+
+Created for O'Reilly Live Events by Lauro Silva, LLC.
