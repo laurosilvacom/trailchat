@@ -1,4 +1,4 @@
-# Trailchat - AI-Powered Web Application Demo
+# Trailchat 🏕️ - AI-Powered Web Application Demo
 
 This repository contains the demo application for the O'Reilly Live Event: [AI-Powered Web Applications](https://www.oreilly.com/live-events/ai-powered-web-applications/0642572014610/).
 
