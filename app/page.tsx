@@ -1,7 +1,7 @@
 export default function Home() {
 	return (
 		<div>
-			<h1>Trailchat</h1>
+			<h1>Trailchat App</h1>
 		</div>
 	)
 }
