@@ -72,7 +72,7 @@ export default function ChatPage() {
 			<div className="flex flex-1 flex-col">
 				<main className="flex-1 overflow-auto">
 					<div className="mx-auto max-w-3xl px-4 py-6 md:px-6 lg:px-8">
-						<MessageList messages={messages} />
+						<MessageList messages={messages} isLoading={isLoading} />
 					</div>
 				</main>
 
