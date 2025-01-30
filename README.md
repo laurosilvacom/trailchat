@@ -1,10 +1,13 @@
 # Trailchat 🏕️ - AI-Powered Web Application Demo
 
-This repository contains the demo application for the O'Reilly Live Event: [AI-Powered Web Applications](https://www.oreilly.com/live-events/ai-powered-web-applications/0642572014610/).
+This repository contains the demo application for the O'Reilly Live Event:
+[AI-Powered Web Applications](https://www.oreilly.com/live-events/ai-powered-web-applications/0642572014610/).
 
 ## About the Course
 
-Learn how to build and deploy fully functional AI-powered web applications using the AI SDK. This hands-on course demonstrates the integration of modern AI capabilities into web applications using Next.js and the Vercel AI SDK.
+Learn how to build and deploy fully functional AI-powered web applications using
+the AI SDK. This hands-on course demonstrates the integration of modern AI
+capabilities into web applications using Next.js and the Vercel AI SDK.
 
 ## Tech Stack
 
@@ -42,7 +45,8 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+application.
 
 ## Environment Setup
 
@@ -66,7 +70,8 @@ Create a `.env.local` file in the root directory and add your API keys:
 
 ## Contributing
 
-This is a demo application for educational purposes. If you find any issues or have suggestions, please open an issue in the repository.
+This is a demo application for educational purposes. If you find any issues or
+have suggestions, please open an issue in the repository.
 
 ## License
 
