@@ -80,17 +80,15 @@ function Message({message, index}: {message: Message; index: number}) {
 						{message.role === 'user' ? 'You' : 'TrailChat AI'}
 					</span>
 
-					<div
-						className={cn(
-							'rounded-lg px-4 py-2 shadow-sm',
-							message.role === 'user'
-								? 'bg-primary text-primary-foreground'
-								: 'bg-secondary text-secondary-foreground'
-						)}>
+					{message.content ? (
 						<p className="whitespace-pre-wrap text-sm leading-relaxed">
 							{message.content}
 						</p>
-					</div>
+					) : message.toolInvocations ? (
+						<div className="text-sm">
+							<p className="font-medium">Calculating heart rate zones...</p>
+						</div>
+					) : null}
 
 					{/* Optional: Add timestamp */}
 					<span className="text-xs text-muted-foreground/60">

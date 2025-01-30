@@ -23,7 +23,7 @@ export function ChatInput({
 				<Input
 					value={input}
 					onChange={handleInputChange}
-					placeholder="Message TrailChat..."
+					placeholder="Ask about heart rate zones..."
 					className={cn(
 						'min-h-[50px] border-0 bg-transparent text-base',
 						'placeholder:text-muted-foreground/60',

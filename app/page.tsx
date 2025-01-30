@@ -10,8 +10,16 @@ import {dummyMessages} from './utils/dummy-data'
 import {cn} from '@/lib/utils'
 
 export default function ChatPage() {
-	const {messages, input, handleInputChange, handleSubmit, setMessages} =
-		useChat()
+	const {
+		messages,
+		input,
+		handleInputChange,
+		handleSubmit,
+		setMessages,
+		isLoading // Add this
+	} = useChat({
+		maxSteps: 2 // Add this to enable multi-step tool calls
+	})
 	const [selectedChat, setSelectedChat] = useState('new')
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
