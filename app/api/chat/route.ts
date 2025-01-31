@@ -1,8 +1,38 @@
 import {openai} from '@ai-sdk/openai'
 import {streamText, tool} from 'ai'
 import {z} from 'zod'
+import {
+	calculateTrimpScore,
+	calculateRiegelPrediction,
+	calculateTrailMetrics,
+	calculateKarvonenZones
+} from '@/lib/running-calculations'
 
 export const maxDuration = 30
+
+// Validation schemas
+const HRInputSchema = z.object({
+	maxHR: z.number().describe('Maximum heart rate in beats per minute'),
+	restingHR: z.number().describe('Resting heart rate in beats per minute')
+})
+
+const RacePredictionSchema = z.object({
+	recentDistance: z.number().describe('Recent race distance in miles'),
+	recentTime: z.number().describe('Recent race time in minutes')
+})
+
+const TrailDifficultySchema = z.object({
+	distance: z.number().describe('Distance in miles'),
+	elevationGain: z.number().describe('Elevation gain in feet'),
+	surfaceType: z.enum(['technical', 'moderate', 'easy'])
+})
+
+const TrainingLoadSchema = z.object({
+	duration: z.number().describe('Duration in minutes'),
+	avgHR: z.number().describe('Average heart rate'),
+	maxHR: z.number().describe('Maximum heart rate'),
+	restingHR: z.number().describe('Resting heart rate')
+})
 
 export async function POST(req: Request) {
 	const {messages} = await req.json()
@@ -13,43 +43,34 @@ export async function POST(req: Request) {
 		tools: {
 			calculateHRZones: tool({
 				description:
-					'Calculate heart rate training zones based on max heart rate',
-				parameters: z.object({
-					maxHR: z.number().describe('Maximum heart rate in beats per minute')
-				}),
-				execute: async ({maxHR}) => {
-					return {
-						zone1: {
-							name: 'Zone 1 - Recovery',
-							min: Math.round(maxHR * 0.5),
-							max: Math.round(maxHR * 0.6),
-							description: 'Very light intensity, warm up and recovery'
-						},
-						zone2: {
-							name: 'Zone 2 - Endurance',
-							min: Math.round(maxHR * 0.6),
-							max: Math.round(maxHR * 0.7),
-							description: 'Light intensity, improves basic endurance'
-						},
-						zone3: {
-							name: 'Zone 3 - Aerobic',
-							min: Math.round(maxHR * 0.7),
-							max: Math.round(maxHR * 0.8),
-							description: 'Moderate intensity, improves aerobic fitness'
-						},
-						zone4: {
-							name: 'Zone 4 - Threshold',
-							min: Math.round(maxHR * 0.8),
-							max: Math.round(maxHR * 0.9),
-							description: 'Hard intensity, increases lactate threshold'
-						},
-						zone5: {
-							name: 'Zone 5 - VO2 Max',
-							min: Math.round(maxHR * 0.9),
-							max: maxHR,
-							description: 'Maximum intensity, improves speed and power'
-						}
-					}
+					'Calculate heart rate training zones using Karvonen Formula',
+				parameters: HRInputSchema,
+				execute: async ({maxHR, restingHR}) => {
+					return calculateKarvonenZones(maxHR, restingHR)
+				}
+			}),
+
+			calculateRacePredictions: tool({
+				description: 'Calculate race predictions using Riegel formula',
+				parameters: RacePredictionSchema,
+				execute: async ({recentDistance, recentTime}) => {
+					return calculateRiegelPrediction(recentDistance, recentTime)
+				}
+			}),
+
+			calculateTrailDifficulty: tool({
+				description: 'Calculate trail difficulty using elevation and distance',
+				parameters: TrailDifficultySchema,
+				execute: async ({distance, elevationGain, surfaceType}) => {
+					return calculateTrailMetrics(distance, elevationGain, surfaceType)
+				}
+			}),
+
+			calculateTrainingLoad: tool({
+				description: 'Calculate training load using TRIMP score',
+				parameters: TrainingLoadSchema,
+				execute: async ({duration, avgHR, maxHR, restingHR}) => {
+					return calculateTrimpScore(duration, avgHR, maxHR, restingHR)
 				}
 			})
 		}
