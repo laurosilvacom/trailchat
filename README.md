@@ -1,4 +1,4 @@
-# AI-Powered Chat Application Workshop
+# 🌟 AI-Powered Chat Application Workshop
 
 This repository contains the demo application for the O'Reilly Live Event:
 [AI-Powered Web Applications](https://www.oreilly.com/live-events/ai-powered-web-applications/0642572014610/).
@@ -30,7 +30,7 @@ By the end of this course, you'll be able to:
 
 🚠 Module 4: Advanced Features and Deployment (60m)
 
-Format: Demo → Code → Review
+Format: `Demo` → `Code` → `Review`
 
 ## Course Resources
 
