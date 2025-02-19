@@ -1,4 +1,4 @@
-# Trailchat 🏕️ - AI-Powered Web Application Demo
+# AI-Powered Chat Application Workshop
 
 This repository contains the demo application for the O'Reilly Live Event:
 [AI-Powered Web Applications](https://www.oreilly.com/live-events/ai-powered-web-applications/0642572014610/).
@@ -9,64 +9,41 @@ Learn how to build and deploy fully functional AI-powered web applications using
 the AI SDK. This hands-on course demonstrates the integration of modern AI
 capabilities into web applications using Next.js and the Vercel AI SDK.
 
-## Tech Stack
+## Learning Objectives
 
-- [Next.js 14](https://nextjs.org/)
-- [Vercel AI SDK](https://sdk.vercel.ai/docs)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
+By the end of this course, you'll be able to:
 
-## Getting Started
+1. Integrate AI language models into React applications
+2. Develop interactive chat interfaces using AI SDK
+3. Construct accessible UIs with Tailwind and shadcn
+4. Deploy AI-powered applications with user interactions
 
-1. Clone the repository:
+## Schedule
 
-```bash
-git clone [repository-url]
-cd trailchat
-```
+🌈 Module 1: UI Scaffolding of AI Chat Interface (60m)
 
-2. Install dependencies:
+🎒 Module 2: AI SDK Implementation (50m)
 
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-```
+☕ Break: 10-Minute Coffee Break
 
-3. Run the development server:
+🏕️ Module 3: Building Dynamic Chat Interfaces (60m)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+🚠 Module 4: Advanced Features and Deployment (60m)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
-application.
-
-## Environment Setup
-
-Create a `.env.local` file in the root directory and add your API keys:
-
-```env
-# Add your environment variables here
-```
-
-## Features
-
-- Feature 1 (TBD)
-- Feature 2 (TBD)
-- Feature 3 (TBD)
+Format: Demo → Code → Review
 
 ## Course Resources
 
 - [Course Link](https://www.oreilly.com/live-events/ai-powered-web-applications/0642572014610/)
 - [Presentation Slides](#) (TBD)
 - [Additional Resources](#) (TBD)
+
+## Tech Stack
+
+- [Next.js 14](https://nextjs.org/)
+- [Vercel AI SDK](https://sdk.vercel.ai/docs)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ## Contributing
 
