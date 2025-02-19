@@ -1,15 +1,11 @@
 import type {Metadata} from 'next'
-import {Geist_Mono} from 'next/font/google'
+import {GeistSans} from 'geist/font/sans'
+import {GeistMono} from 'geist/font/mono'
 import './globals.css'
-
-const geistMono = Geist_Mono({
-	subsets: ['latin'],
-	variable: '--font-geist-mono'
-})
 
 export const metadata: Metadata = {
 	title: 'Trailchat',
-	description: 'A modern chat application for trail runners!'
+	description: 'A modern AI chat application for trail runners!'
 }
 
 export default function RootLayout({
@@ -19,7 +15,8 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${geistMono.variable} font-sans antialiased`}>
+			<body
+				className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}>
 				{children}
 			</body>
 		</html>

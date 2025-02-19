@@ -1,6 +1,7 @@
-import type {Message} from 'ai'
-import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar'
+import {type Message} from 'ai'
 import {motion} from 'framer-motion'
+import {highlight} from 'sugar-high'
+import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar'
 import {cn} from '@/lib/utils'
 
 type MessageListProps = {
@@ -8,8 +9,52 @@ type MessageListProps = {
 	isLoading?: boolean
 }
 
+type MessageSegment = {
+	type: 'text' | 'code'
+	content: string
+	language?: string // Make it optional since text segments won't have it
+}
+
+function processCodeBlocks(content: string): MessageSegment[] {
+	const codeBlockRegex = /```(\w+)?\n([\s\S]*?)```/g
+	let lastIndex = 0
+	const segments: MessageSegment[] = []
+	let match: RegExpExecArray | null
+
+	while ((match = codeBlockRegex.exec(content)) !== null) {
+		// Add text before code block
+		if (match.index > lastIndex) {
+			segments.push({
+				type: 'text',
+				content: content.slice(lastIndex, match.index)
+			})
+		}
+
+		// Extract language and code
+		const language = match[1]?.toLowerCase() ?? 'txt'
+		const code = match[2]?.trim() ?? ''
+
+		segments.push({
+			type: 'code',
+			content: highlight(code),
+			language // Store the language information
+		})
+
+		lastIndex = match.index + match[0].length
+	}
+
+	// Add remaining text
+	if (lastIndex < content.length) {
+		segments.push({
+			type: 'text',
+			content: content.slice(lastIndex)
+		})
+	}
+
+	return segments
+}
+
 export function MessageList({messages, isLoading}: MessageListProps) {
-	// Add empty state
 	if (messages.length === 0) {
 		return (
 			<div className="flex flex-1 flex-col items-center justify-center gap-2">
@@ -27,7 +72,6 @@ export function MessageList({messages, isLoading}: MessageListProps) {
 				<Message key={message.id} message={message} index={index} />
 			))}
 
-			{/* Loading indicator */}
 			{isLoading && (
 				<motion.div
 					initial={{opacity: 0}}
@@ -81,16 +125,30 @@ function Message({message, index}: {message: Message; index: number}) {
 					</span>
 
 					{message.content ? (
-						<p className="whitespace-pre-wrap text-sm leading-relaxed">
-							{message.content}
-						</p>
-					) : message.toolInvocations ? (
-						<div className="text-sm">
-							<p className="font-medium">Calculating heart rate zones...</p>
+						<div
+							className={cn(
+								'prose prose-sm dark:prose-invert max-w-none',
+								'prose-p:leading-relaxed prose-pre:px-0',
+								'prose-pre:bg-muted prose-pre:rounded-lg prose-pre:p-4',
+								message.role === 'user' ? 'text-right' : 'text-left'
+							)}>
+							{processCodeBlocks(message.content).map((segment, i) =>
+								segment.type === 'code' ? (
+									<pre key={i} data-language={segment.language}>
+										<code
+											className={`language-${segment.language}`}
+											dangerouslySetInnerHTML={{__html: segment.content}}
+										/>
+									</pre>
+								) : (
+									<p key={i} className="whitespace-pre-wrap">
+										{segment.content}
+									</p>
+								)
+							)}
 						</div>
 					) : null}
 
-					{/* Optional: Add timestamp */}
 					<span className="text-xs text-muted-foreground/60">
 						{new Date().toLocaleTimeString([], {
 							hour: '2-digit',

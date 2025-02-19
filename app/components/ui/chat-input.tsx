@@ -14,18 +14,13 @@ export function ChatInput({
 }) {
 	return (
 		<form onSubmit={handleSubmit}>
-			<div
-				className={cn(
-					'flex items-center gap-3',
-					'rounded-lg border bg-background/95 p-3',
-					'shadow-lg ring-1 ring-border/5'
-				)}>
+			<div className={cn('flex items-center gap-3', 'p-3')}>
 				<Input
 					value={input}
 					onChange={handleInputChange}
 					placeholder="Ask about heart rate zones..."
 					className={cn(
-						'min-h-[50px] border-0 bg-transparent text-base',
+						'min-h-[50px] bg-transparent text-base',
 						'placeholder:text-muted-foreground/60',
 						'focus-visible:ring-0'
 					)}
