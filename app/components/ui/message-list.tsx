@@ -15,6 +15,28 @@ type MessageSegment = {
 	language?: string // Make it optional since text segments won't have it
 }
 
+function processMarkdown(text: string): string {
+	// Handle headings: ### Heading -> <h3>Heading</h3>
+	text = text.replace(
+		/###\s+(.*?)(?:\n|$)/g,
+		'<h3 class="text-lg font-semibold mt-4 mb-2">$1</h3>'
+	)
+
+	// Handle bold text: **text** -> <strong>text</strong>
+	text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+
+	// Handle italic text: *text* -> <em>text</em>
+	text = text.replace(/\*(.*?)\*/g, '<em>$1</em>')
+
+	// Handle links: [text](url) -> <a href="url">text</a>
+	text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+
+	// Handle line breaks
+	text = text.replace(/\n/g, '<br />')
+
+	return text
+}
+
 function processCodeBlocks(content: string): MessageSegment[] {
 	const codeBlockRegex = /```(\w+)?\n([\s\S]*?)```/g
 	let lastIndex = 0
@@ -58,9 +80,9 @@ export function MessageList({messages, isLoading}: MessageListProps) {
 	if (messages.length === 0) {
 		return (
 			<div className="flex flex-1 flex-col items-center justify-center gap-2">
-				<p className="text-lg font-medium">Welcome to TrailChat! ✨</p>
+				<p className="text-lg font-medium">Welcome to TrailChat!</p>
 				<p className="text-sm text-muted-foreground">
-					Ask me anything about trail running!
+					Ask me anything about running!
 				</p>
 			</div>
 		)
@@ -127,23 +149,22 @@ function Message({message, index}: {message: Message; index: number}) {
 					{message.content ? (
 						<div
 							className={cn(
-								'prose prose-sm dark:prose-invert max-w-none',
-								'prose-p:leading-relaxed prose-pre:px-0',
-								'prose-pre:bg-muted prose-pre:rounded-lg prose-pre:p-4',
+								'prose dark:prose-invert',
 								message.role === 'user' ? 'text-right' : 'text-left'
 							)}>
 							{processCodeBlocks(message.content).map((segment, i) =>
 								segment.type === 'code' ? (
-									<pre key={i} data-language={segment.language}>
-										<code
-											className={`language-${segment.language}`}
-											dangerouslySetInnerHTML={{__html: segment.content}}
-										/>
+									<pre key={i} className="max-w-4xl overflow-x-auto">
+										<code dangerouslySetInnerHTML={{__html: segment.content}} />
 									</pre>
 								) : (
-									<p key={i} className="whitespace-pre-wrap">
-										{segment.content}
-									</p>
+									<div
+										key={i}
+										dangerouslySetInnerHTML={{
+											__html: processMarkdown(segment.content)
+										}}
+										className="whitespace-pre-wrap"
+									/>
 								)
 							)}
 						</div>

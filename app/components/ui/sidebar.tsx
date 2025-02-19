@@ -1,9 +1,10 @@
 'use client'
 import {usePathname, useRouter} from 'next/navigation'
 import {Button} from '@/components/ui/button'
-import {PlusCircle, MessageSquare, ChevronRight, CableCar} from 'lucide-react'
+import {PlusCircle, MessageSquare, CableCar} from 'lucide-react'
 import {dummyMessages} from '@/utils/dummy-data'
 import Link from 'next/link'
+import {SignedIn, UserButton} from '@clerk/nextjs'
 
 // Convert dummyMessages to array of chat objects
 const dummyChats = Object.entries(dummyMessages).map(([id, messages]) => {
@@ -68,10 +69,24 @@ export function Sidebar() {
 			</nav>
 
 			<div className="mt-auto border-t border-muted-foreground/20 pt-2">
-				<Button variant="ghost" className="w-full">
-					Upgrade to Plus
-					<ChevronRight className="h-4 w-4" />
-				</Button>
+				<SignedIn>
+					<div className="flex w-full items-center gap-2 p-2">
+						<UserButton
+							afterSignOutUrl="/"
+							appearance={{
+								elements: {
+									userButtonBox: 'w-full',
+									userButtonTrigger:
+										'w-full flex items-center justify-between gap-2 rounded-lg p-2 hover:bg-muted/50 transition-colors',
+									userButtonAvatarBox: 'h-8 w-8',
+									userButtonAvatarImage: 'rounded-full',
+									userButtonOuterIdentifier:
+										'text-sm text-muted-foreground font-medium'
+								}
+							}}
+						/>
+					</div>
+				</SignedIn>
 			</div>
 		</aside>
 	)

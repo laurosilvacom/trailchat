@@ -67,49 +67,55 @@
 	}
 }
 
-/* Code Block Styling */
 .prose pre {
+	@apply my-4 max-w-full rounded-lg bg-muted p-4;
 	background-color: hsl(var(--muted));
-	color: hsl(var(--card-foreground));
-	counter-reset: sh-line-number;
+	color: hsl(var(--foreground));
+}
+
+/* Code Block Content */
+.prose pre code {
+	@apply block text-sm;
+	font-family: var(--font-mono);
+}
+
+/* Wrapper to prevent horizontal overflow */
+.prose {
+	@apply max-w-full;
+}
+
+.prose pre {
+	@apply max-w-[calc(100vw-2rem)]; /* Prevent horizontal overflow with padding */
+}
+
+/* Message specific adjustments */
+.message-content {
+	@apply max-w-full overflow-hidden;
+}
+
+/* Code block specific styling */
+.code-block {
+	@apply relative;
+	background-color: hsl(var(--muted));
+	border: 1px solid hsl(var(--border));
+	border-radius: 0.5rem;
+}
+
+/* Remove default prose padding/margins for code blocks */
+.prose pre {
+	@apply !m-0 !p-0;
+}
+
+/* Actual code content padding */
+.prose pre code {
+	@apply block p-4;
+}
+
+/* Horizontal scroll handling */
+.prose pre {
+	@apply overflow-x-auto;
 }
 
 .prose pre code {
-	@apply !text-base !leading-relaxed;
-	font-size: inherit !important;
-}
-
-/* Reset the line number counter for code inside pre elements */
-pre code {
-	counter-reset: sh-line-number;
-}
-
-/* Apply line numbers to code lines within pre elements */
-pre code .sh__line::before {
-	counter-increment: sh-line-number;
-	content: counter(sh-line-number);
-	margin-right: 24px;
-	text-align: right;
-	color: hsl(var(--muted-foreground));
-}
-
-/* Inline Code Styling */
-code:not(pre code) {
-	@apply rounded-sm px-3 py-0.5 text-xs font-normal;
-	background-color: hsl(var(--muted));
-	color: hsl(var(--muted-foreground));
-}
-
-/* Ensure inline code spans inherit styles correctly */
-code:not(pre code) span {
-	font-weight: inherit;
-	color: inherit;
-}
-
-/* Remove default quotes added by some CSS resets or styles */
-.prose
-	:where(code):not(:where([class~='not-prose'], [class~='not-prose'] *)):before,
-.prose
-	:where(code):not(:where([class~='not-prose'], [class~='not-prose'] *)):after {
-	content: none;
+	@apply inline-block min-w-full;
 }

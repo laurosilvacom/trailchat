@@ -3,13 +3,19 @@ import Link from 'next/link'
 import {Button} from '@/components/ui/button'
 import {CableCar, TreePine, ArrowRight, Mountain} from 'lucide-react'
 import {motion} from 'framer-motion'
+import {
+	SignInButton,
+	SignUpButton,
+	SignedIn,
+	SignedOut,
+	UserButton
+} from '@clerk/nextjs'
 
 export default function HomePage() {
 	return (
 		<div className="min-h-screen bg-primary text-primary-foreground">
 			{/* Gradient Background */}
 			<div className="absolute inset-0 bg-gradient-to-b from-primary-foreground/5 to-transparent" />
-
 			{/* Header */}
 			<header className="relative border-b border-primary-foreground/10 backdrop-blur-sm">
 				<nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -18,12 +24,17 @@ export default function HomePage() {
 						<span className="text-2xl font-bold tracking-tight">TrailChat</span>
 					</div>
 					<div className="flex items-center gap-6">
-						<Link href="/login">
-							<Button variant="ghost">Log in</Button>
-						</Link>
-						<Link href="/signup">
-							<Button variant="ghost">Sign up</Button>
-						</Link>
+						<SignedOut>
+							<SignInButton mode="modal">
+								<Button variant="ghost">Log in</Button>
+							</SignInButton>
+							<SignUpButton mode="modal">
+								<Button variant="ghost">Sign up</Button>
+							</SignUpButton>
+						</SignedOut>
+						<SignedIn>
+							<UserButton afterSignOutUrl="/" />
+						</SignedIn>
 					</div>
 				</nav>
 			</header>
@@ -54,11 +65,20 @@ export default function HomePage() {
 							initial={{opacity: 0, y: 20}}
 							animate={{opacity: 1, y: 0}}
 							transition={{delay: 0.4}}>
-							<Link href="/chat">
-								<Button size="lg" variant={'secondary'}>
-									Try TrailChat <ArrowRight className="ml-2 h-5 w-5" />
-								</Button>
-							</Link>
+							<SignedIn>
+								<Link href="/chat">
+									<Button size="lg" variant={'secondary'}>
+										Try TrailChat <ArrowRight className="ml-2 h-5 w-5" />
+									</Button>
+								</Link>
+							</SignedIn>
+							<SignedOut>
+								<SignUpButton mode="modal">
+									<Button size="lg" variant={'secondary'}>
+										Try TrailChat <ArrowRight className="ml-2 h-5 w-5" />
+									</Button>
+								</SignUpButton>
+							</SignedOut>
 						</motion.div>
 					</div>
 
