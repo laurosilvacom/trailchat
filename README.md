@@ -1,7 +1,4 @@
-# AI-Powered Chat Application Demo
-
-> A demonstration application for the course "Build AI-Powered Fullstack
-> Applications with Next.js"
+# AI Fullstack Applications with Next.js Demo App
 
 ## 🚀 Overview
 
@@ -41,10 +38,8 @@ practices for error tracking and performance monitoring.
 
 ### 5. Styling the Application
 
-- Tailwind CSS implementation
-- Radix UI component integration
+- shadcn/ui
 - Responsive design principles
-- Deploying styled application
 
 ### 6. Performance Optimization
 
@@ -73,15 +68,31 @@ practices for error tracking and performance monitoring.
 - 🎨 Modern UI with Tailwind CSS and Radix UI
 - 🔍 Real-time error tracking with Sentry
 - ⚡ Optimized performance using React Server Components
-- 📱 Responsive design for all devices
+
+## 🌟 Core Principles
+
+### 1. Debuggability-First Development
+
+We embrace Sentry's philosophy that monitoring alone isn't enough. Throughout
+this course, you'll learn to:
+
+- 🔍 Implement proactive error detection
+- 📊 Gather actionable context for rapid issue resolution
+- 🚀 Optimize performance with real-time insights
+
+### 2. End-to-End Tracing
+
+In our distributed AI-powered application, we'll demonstrate:
+
+- 📈 Transaction tracking across the full stack
+- 🔗 Correlation between AI operations and user interactions
+- 🕵️ Root cause analysis in complex scenarios
 
 ## 🛠️ Tech Stack
 
 - [Next.js 14](https://nextjs.org/)
 - [AI SDK](https://sdk.vercel.ai/docs)
 - [Sentry](https://sentry.io/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Radix UI](https://www.radix-ui.com/)
 
 ## 📋 Prerequisites
 
@@ -143,25 +154,6 @@ configure Sentry:
 1. Create a project in Sentry
 2. Add your DSN to the environment variables
 3. Configure additional settings in `sentry.config.js`
-
-### AI SDK Configuration
-
-The AI SDK is configured in `app/api/chat/route.ts`. You can modify the model
-and parameters according to your needs.
-
-## 📦 Project Structure
-
-```
-├── app/
-│   ├── api/
-│   │   └── chat/
-│   ├── components/
-│   ├── styles/
-│   └── page.tsx
-├── public/
-├── sentry.config.js
-└── tailwind.config.js
-```
 
 ## 🎯 Target Audience
 
